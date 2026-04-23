@@ -1,0 +1,29 @@
+server:
+  port: 8888
+
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/pedinephro2/nephro-config.git
+          default-label: main
+          clone-on-start: true
+          force-pull: true
+          username: ${CONFIG_REPO_USERNAME:}
+          password: ${CONFIG_REPO_TOKEN:}
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+  instance:
+    prefer-ip-address: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,refresh
